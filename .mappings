@@ -1,0 +1,7 @@
+[general]
+i3config = "~/.config/i3/config"
+i3statusconfig = "~/.config/i3status/config"
+keyboard = "/etc/default/keyboard"
+nvim = "~/.config/nvim/init.vim"
+"wezterm.lua" = "~/.config/wezterm/wezterm.lua"
+zshrc = "~/.zshrc"
