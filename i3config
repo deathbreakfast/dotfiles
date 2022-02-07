@@ -9,6 +9,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Background color
+exec --no-startup-id xsetroot -solid "#ebdbb2"
+
 # custom keybindings
 #
 # Modifier key
@@ -71,7 +74,7 @@ bindsym $mod+Return exec ~/bin/wezterm
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "MesloLGS NF:pixelsize=24"
+bindsym $mod+d exec --no-startup-id dmenu_run -b -i -fn "MesloLGS NF:pixelsize=24"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a

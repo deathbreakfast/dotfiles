@@ -6,22 +6,43 @@ set number relativenumber
 set colorcolumn=99,100
 set scrolloff=10
 
+" Match Gruvbox theme
 hi FgCocErrorFloatBgCocFloating ctermfg=15 ctermbg=1 guifg=White guibg=Red
 hi Pmenu ctermbg=242 guibg=DarkGrey
 
 filetype plugin on
 
-" Select word
+" Highlight current selected word. Space key to activate in visual mode
 noremap <space> viw
 
-" Split on `\` + `v`
+" Split the current file on `\` + `v`
 noremap <leader>v :vsplit<CR>
 noremap <S-h> <C-w>h 
 noremap <S-l> <C-w>l
 
-" Select inner word and paste
+" Quick yank (copy) paste of words `<shift>` + `y` or `p` respectively
 noremap <S-p> viwpviwy
 noremap <S-y> viwy
+
+" =====================
+" On file read evenets
+" =====================
+
+" ==== .toml  =========
+autocmd BufReadPost *.toml set tabstop=2
+autocmd BufReadPost *.toml set shiftwidth=2
+
+
+" ==== .rs  ==========
+autocmd BufReadPost *.rs set tabstop=4
+autocmd BufReadPost *.rs set shiftwidth=4
+autocmd BufReadPost *.rs set colorcolumn=80,100
+autocmd BufReadPost *.rs set shiftwidth=2
+
+" =====================
+" On file write evenets
+" =====================
+
 
 " ======================
 " Package Manager
@@ -29,9 +50,7 @@ noremap <S-y> viwy
 
 call plug#begin('~/.vim/plugged')
 
-" =============
-" Plugins here
-" =============
+" ==== Plugins =========
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
@@ -41,12 +60,7 @@ Plug 'cloudhead/neovim-fuzzy'
 " Readme viewer `:MarkdownPreview` to start and `"MarkdownPreviewStop` to stop
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-
-" =============
-" End of Plugins
-" =============
-" Plugin Configuration
-" =============
+" ==== Config =========
 
 " coc.nvim Enter to select when nothing is highlighted
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -54,7 +68,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 " Shift tab to navigate the completion list backwards
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"
+
 " Code formatting on save
 augroup mygroup
   autocmd!
@@ -69,15 +83,13 @@ let g:rustfmt_autosave = 1
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
-" Coc Jump to definition on `\a` + `e`
+" Will split the current screen horizontally and open up the definition of the highlighted text 
+" with `\` + `v`
 noremap <leader>o :call CocAction('jumpDefinition', 'vsplit')<CR>
 
-" Fuzzy filesearch and grep
+" Fuzzy filesearch and grep on `\` + `f` or `e` respectively. 
+" This keeps the shortcuts similar to default vim
 noremap <leader>e :FuzzyOpen<CR>
 noremap <leader>f :FuzzyGrep<CR>
 
 call plug#end()
-
-" ======================
-" End of Package Manager
-" ======================
